@@ -296,27 +296,3 @@ HTTPS = HTTP + SSL(或TLS) + 认证(证书) + 加密(加密算法)
 
 其中，数据完整性和隐私性由TLS Record Protocol保证，身份认证由TLS Handshaking Protocols实现。
 
-
-
-### 参考
-
-- 《HTTP权威指南》
-
-  David Gourley， Brian Totty 著
-
-- 《计算机网络》(第七版)
-
-  谢希仁 著
-
-- 《图解HTTP》
-
-  上野宣 著[人民邮电出版社]
-
-- 《图解TCP/IP》
-
-  竹下隆史，春山公保、荒井透 著
-
-- 《TCP/IP详解 卷1：协议》
-
-   [美\] W·Richard Stevens] 著
-
