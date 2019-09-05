@@ -6,7 +6,7 @@ tags:
 - webpack
 - vue
 - 前端工程化
-description: "这里介绍了清除上次打包后的dist文件夹，CopyWebpackPlugin的作用，减小打包出来的bundle.js文件的大小，从bundle里抽离出css，可视化分析打包文件的webpack插件，还有webpack sourceMap定位压缩前代码错误，与配置本地代理。"
+description: "这里介绍了清除上次打包后的dist文件夹，CopyWebpackPlugin的作用，减小打包出来的bundle.js文件的大小，从bundle里抽离出css，可视化分析打包文件的webpack插件，还有webpack sourceMap定位压缩前代码错误，与配置本地代理实现开发环境跨域。"
 ---
 
 ## 清除上次打包的东西clean-webpack-plugin
