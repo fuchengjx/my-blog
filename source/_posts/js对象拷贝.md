@@ -168,9 +168,11 @@ console.log('JSON srcObj', srcObj); // { name: '明', grade: { chi: '50', eng: '
 JSON.parse()和JSON.stringify()能正确处理的对象只有Number、String、Array等能够被json表示的数据结构，因此函数这种不能被json表示的类型将不能被正确处理。比如
 
 ```
-srcObj = {'name': '明', grade: {'chi': '50', 'eng': '50'},
-    'hello': function() {console.log('hello')}};
-// copyObj2 = Object.assign({}, srcObj);
+srcObj = {
+		 'name': '明', 
+		  grade: {'chi': '50', 'eng': '50'},
+         'hello': function() {console.log('hello')}
+         };
 copyObj2 = JSON.parse(JSON.stringify(srcObj));
 copyObj2.name = '红';
 copyObj2.grade.chi = '60';
@@ -178,6 +180,60 @@ console.log('JSON srcObj', copyObj2); //{ name: '红', grade: { chi: '60', eng: 
 ```
 
 可以看出，经过转换之后，function丢失了，因此JSON.parse()和JSON.stringify()还是需要谨慎使用。
+
+所以我们需要自己写一个可以进行深拷贝的代码。
+
+##### 自定义的深拷贝方法
+
+```
+function clone(target) {
+  if (typeof target === 'object') {
+    let newObject = {}
+    for (key in target) {
+      newObject[key] = clone(target[key])
+    }
+    return newObject
+  } else {
+    return target
+  }
+}
+```
+
+因为在深拷贝里，我们不知道要拷贝的对象是多少深度的，所以我们用递归来解决。
+
+- 如果是基本类型，就无需拷贝直接返回
+- 如果是引用类型就创建一个新的对象，遍历需要拷贝的对象，如果有更深层次的对象就继续递归到其为基本数据类型。这样我们就完成了一个很简单的深拷贝。
+
+###### 考虑数组
+
+上面的方法，我们只考虑了object，如果要拷贝数组的话，只要在新建对象那边加一个判断就行了。
+
+```
+function clone(target) {
+  if (typeof target === 'object') {
+    let newTarget = Array.isArray(target) ? [] : {} // 判断这个引用类型是不是数组，如果是新建一个数组，再往数组内添加属性。如果不是新建一个对象，往对象内添加属性
+    for (key in target) {
+      newTarget[key] = clone(target[key])
+    }
+    return newTarget
+  } else {
+    return target
+  }
+}
+```
+
+###### 如果考虑函数。。。
+
+- **箭头函数**： 将它转为字符串，再将字符串转换为方法。 
+
+  ```
+  constconst arrowFunction = () => {}
+  eval(arrowFunction.toString)
+  ```
+
+- **普通函数**：可以使用正则来处理普通函数
+
+  分别使用正则取出函数体和函数参数，然后使用`new Function ([arg1[, arg2[, ...argN]],] functionBody)`构造函数重新构造一个新的函数。
 
 
 
