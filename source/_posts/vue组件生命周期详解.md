@@ -142,3 +142,41 @@ export default {
 从组件A跳转到组件B。**每次进入一个组件，这个组件原来的实例都会被销毁，然后新的实例会被建立**
 
 ![1567685173570](http://img.flura.cn/1567685173570.png)
+
+### 使用keep-alive
+
+- `<keep-alive>` 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。
+- 当组件在 `<keep-alive>` 内被切换，它的 `activated` 和 `deactivated` 这两个生命周期钩子函数将会被对应执行。
+
+在路由出口渲染组件时配置：
+
+```
+<keep-alive >
+  <router-view  v-if="$route.meta.keepAlive"/>
+</keep-alive>
+<router-view v-if="!$route.meta.keepAlive"></router-view>
+```
+
+```router.js
+    {
+      path: '/A',
+      name: 'A',
+      component: () => import  ('../components/Achild'),
+      meta: {
+        keepAlive: true  // 需要缓存 通过keep-alive 保存该组件的状态
+      }
+    },
+    {
+      path: '/B',
+      name: 'B',
+      component: () => import('../components/Bchild'),
+      meta: {
+        keepAlive: true  // 需要缓存 通过keep-alive 保存该组件的状态
+      }
+    }
+```
+
+在设置keep-alive缓存的组件中，首次进入组件，会一次调用组件的钩子函数：created --> mounted -->activated 再次进入时，只触发activated钩子函数。离开这个组件就只会触发deactivated这个钩子。
+
+![](C:\Users\32761\Desktop\vue-component-communication\src\assets\vue-keepAlive1.gif)
+
