@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "save": "node bin/index.js"
+    "save": "node bin/index.js",
+    "hexo": "node bin/hexo.js"
   },
   "hexo": {
     "version": "3.8.0"
