@@ -4,6 +4,7 @@ date: 2019-09-16 11:02:22
 category: web前端
 tags: 
 - WebWork
+- h5
 description: 使用JavaScript执行大型运算时，经常会出现假死现象，这是因为JavaScript是单线程编程语言，运算能力比较弱。HTML5新增Web Workders能够创建一个不影响前台处理的后台进程，并且在这个后台线程中可以继续创建多个子线程，以帮助JavaScript实现多线程的能力。通过WebWork, 开发者可以将耗时较长的处理交给后台线程去运行，从而解决在执行大量运算造成进程阻塞而页面无响应的情况。
 ---
 
