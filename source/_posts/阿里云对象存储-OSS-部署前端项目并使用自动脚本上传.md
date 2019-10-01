@@ -3,9 +3,11 @@ title: 阿里云对象存储(OSS)部署前端项目并使用自动脚本上传
 date: 2019-10-01 19:47:31
 category: '杂项'
 tags:
+- 阿里云
 - oss 
 - 自动化
 - 项目部署
+- webpack
 ---
 
 ## 前言
@@ -58,7 +60,7 @@ tags:
 
 ## 配置deploy.js
 
-打开deploy.js将bucket,region填入。key，secret可能忘记(在刚开始使用阿里云的时候，阿里云会将这个发送给你，并提醒你保存)，可以在**用户信息管理** **安全信息管理**获取到自己的Access Key Secret(也可以在这里创建一个新的AccessKey)。
+打开deploy.js将bucket,region填入。key，secret可能忘记(在刚开始使用阿里云的时候，阿里云会将这个发送给你，并提醒你保存)，可以在**用户信息管理** **安全信息管理**获取到自己的Access Key Secret(也可以在这里创建一个新的AccessKey)。 因为deploy.js中保存有你的阿里云accessKeyId与accessKeySecret 所以**记得在.gitignore文件忽略deploy.js**
 
 ![1569854391813](http://img.flura.cn/1569854391813.png)
 
@@ -95,6 +97,48 @@ tags:
 
 
 
-## github仓库链接
+## webpack项目自动部署到阿里云OSS
+
+这里做一个补充：如果是一个webpack项目 我们使用一个webpack插件，可以实现自动部署到阿里oss的效果。可以极大的提升开发效率，开发完毕，打包项目就可以部署到线上环境。
+
+### `aliyunoss-webpack-plugin`插件使用
+
+1. 首先安装`aliyunoss-webpack-plugin`插件
+
+```
+yarn add aliyunoss-webpack-plugin -D
+// 或者使用 npm i aliyunoss-webpack-plugin -D
+```
+
+1. 修改`webpack.prod.conf.js`
+
+```
+const AliyunossWebpackPlugin = require('aliyunoss-webpack-plugin')
+const oss = require('../oss')
+...
+plugins: [
+    ...
+    // 插入到最后面
+    new AliyunossWebpackPlugin({
+      buildPath: 'dist/**',
+      region: oss.region,
+      accessKeyId: oss.accessKeyId,
+      accessKeySecret: oss.accessKeySecret,
+      bucket: oss.bucket,
+      deleteAll: true,
+      generateObjectPath: function(filename, file) {
+        return file.replace(/dist\//, '')
+      },
+    })
+}
+```
+
+创建一个oss.js 因为不希望 阿里云oss隐私信息被上传到git所以 **记得在.gitignore文件中忽略。**
+
+现在只要执行npm run build就能打包并上传到oss上实现自动部署了。
+
+
+
+## deploy.js github仓库链接
 
 [github仓库](https://github.com/fuchengjx/js_deploy/blob/master/deploy.js)
