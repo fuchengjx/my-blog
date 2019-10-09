@@ -46,7 +46,7 @@ tags:
 
 ![Bucket域名](http://img.flura.cn/1569852876717.png)
 
-![DNS控制台解析](C:\Users\32761\AppData\Roaming\Typora\typora-user-images\1569853154407.png)
+![DNS控制台解析](http://img.flura.cn/1569853154407.png)
 
 ![域名管理](http://img.flura.cn/1569853473577.png)
 
@@ -95,6 +95,8 @@ tags:
 
 ![访问成功](http://img.flura.cn/1569928381648.png)
 
+在这里你可以通过访问 http://example-oss.flura.cn  访问到我的阿里云示例
+
 
 
 ## webpack项目自动部署到阿里云OSS
@@ -142,3 +144,6 @@ plugins: [
 ## deploy.js github仓库链接
 
 [github仓库](https://github.com/fuchengjx/js_deploy/blob/master/deploy.js)
+
+[部署示例](http://example-oss.flura.cn )
+
