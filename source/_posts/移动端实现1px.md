@@ -1,7 +1,7 @@
 ---
 title: 移动端实现1px
 date: 2019-08-25 11:02:27
-category: web前后端
+category: web前端
 tags: 
 - 移动端
 - css		
