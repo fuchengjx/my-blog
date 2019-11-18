@@ -1,5 +1,5 @@
 ---
-title: TypeScript学习笔记(二))
+title: TypeScript学习笔记(二)
 date: 2019-07-12 20:28:03
 category: web前端
 tags: 
