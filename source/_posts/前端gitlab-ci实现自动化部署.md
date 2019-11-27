@@ -262,19 +262,20 @@ install-staging:dep: # Jobs 表示构建工作，表示某个 Stage 里面执行
    running already the config should be automatically reloaded!
    ```
    
+
 ps: 这里面的gitlab-ci coordinator URL 与token
-   
+
 ```
    Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )
    https://mygitlab.com/ci
    Please enter the gitlab-ci token for this runner
    xxx-xxx-xxx
-   ```
-   
+```
+
 是在gitlab配置对应的runner里可以查看的。
-   
+
 ![1569816937998](http://img.flura.cn/1569816937998.png)
-   
+
 ![1569817315527](http://img.flura.cn/1569817315527.png)
 
 #### [配置](https://docs.gitlab.com/ee/ci/runners/README.html#registering-a-specific-runner)
