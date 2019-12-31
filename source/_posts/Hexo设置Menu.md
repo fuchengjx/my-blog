@@ -1,6 +1,7 @@
 ---
 title: Hexo设置Menu
 date: 2019-07-05 21:04:49
+category: '杂项'
 tags: hexo
 ---
 

@@ -32,7 +32,6 @@ tags:
         </div>
     </body>
 </html>
-复制代码
 ```
 
 **index.css**
@@ -46,7 +45,6 @@ body {
     color: white;
     background-color: black;
 }
-复制代码
 ```
 
 **index.js**
@@ -63,7 +61,6 @@ console.log('Success!');
 
 ```
 npm install -D webpack webpack-cli
-复制代码
 ```
 
 安装完成之后可以看到你的`package.json`文件发生了变化，在devDependencies属性下多了两个包的属性。
@@ -78,7 +75,7 @@ npm install -D webpack webpack-cli
 
 - 2.在项目文件夹下新建文件`webpack.base.conf.js`，表示最基本的配置文件，内容如下：
 
-```
+````webpack.base.conf.js`
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
   const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -108,6 +105,38 @@ npm install -D webpack webpack-cli
   };
 ```
 
+其中，`/src/index.html`是你的网站入口HTML文件，`/src/index.js`是你的入口js文件。
+
+.在项目文件夹下新建`webpack.dev.conf.js`文件，表示开发环境下的配置。内容如下：
+
+````webpack.dev.conf.js`
+  const merge = require('webpack-merge');
+  const baseConfig = require('./webpack.base.conf.js');
+
+  module.exports = merge(baseConfig, {
+      mode: 'development',
+      devtool: 'inline-source-map',
+      devServer: {
+          contentBase: './dist',
+          port: 3000
+      }
+  });
+```
+
+在项目文件夹下新建`webpack.prod.conf.js`文件，表示生产环境的配置，内容如下：
+
+```
+  const merge = require('webpack-merge');
+  const baseConfig = require('./webpack.base.conf.js');
+
+  console.log(__dirname);
+  module.exports = merge(baseConfig, {
+      mode: 'production'
+  });
+```
+
+
+
 ## 四、配置npm scripts
 
 配置了三个配置文件以满足两个不同环境下的代码构建，使用语义化较好的`npm scripts`来构建代码有利于简化工作。
@@ -122,10 +151,9 @@ npm install -D webpack webpack-cli
         "build": "webpack --config webpack.prod.conf.js"
     }
 }
-复制代码
 ```
 
-配置完之后，可以尝试修改`/src/index.html`、`/src/index.js`或`/src/index.css`，运行npm scripts命令查看效果。
+配置完之后，可以尝试修改`/src/index.html`、`/src/index.js`或`/src/index.css`，运行npm run start命令查看效果。
 
 做到这里，一个基本的开发环境已经搭建出来了。
 
@@ -164,7 +192,7 @@ module.exports = {
 };
 ```
 
-```、
+```.babelrc
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
@@ -222,7 +250,6 @@ ReactDOM.render(<App/>, document.getElementById('root'));
         'I\'m ' + name + '!'
     );
 })
-复制代码
 ```
 
 箭头函数被写成了function匿名函数。
